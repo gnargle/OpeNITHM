@@ -8,7 +8,7 @@
 
 // Select which board you're using (ignore if not using Teensy)
 //#define TEENSY_V1_0   // Version 1.0 (No version number on board)
-//#define TEENSY_V1_1   // Version 1.1 (v1.1 on board under logo)
+#define TEENSY_V1_1   // Version 1.1 (v1.1 on board under logo)
 
 // Uncomment this line to force the processor to use Serial Output
 //#define FORCE_SERIAL
@@ -17,11 +17,11 @@
 //#define IR_SENSOR_MULTIPLEXED
 
 // Uncomment this line if your IR sensors will be used in analog mode (Confirm pinout on PinConfig.h)
-//#define IR_SENSOR_ANALOG
+#define IR_SENSOR_ANALOG
 
 // Comment this line for default Seaurchin air sensor bindings
 // Uncomment this line if your IR sensors will each be mapped to separate keyboard key
-//#define IR_SENSOR_KEY
+#define IR_SENSOR_KEY
 
 // Uncomment this line if your LED lights are mirrored
 //#define LED_REVERSE

@@ -37,7 +37,7 @@ void initializeController();
 void setup() {
   Serial.begin(115200);
   FastLED.addLeds<LED_TYPE, RGBPIN, LED_ORDER>(leds, 16);
-
+  EEPROM.put(65, 0); //reset sneitivity every time until we're sorted
   initializeController();
 }
 
