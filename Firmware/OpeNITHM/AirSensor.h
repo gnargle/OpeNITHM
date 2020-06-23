@@ -12,7 +12,7 @@
 #include "PinConfig.h"
 #include <EEPROM.h>
 
-#define DEFAULT_SENSITIVITY 100
+#define DEFAULT_SENSITIVITY 88
 
 class AirSensor
 {

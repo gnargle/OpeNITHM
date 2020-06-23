@@ -104,7 +104,7 @@ int AirSensor::getValue(int sensor, bool light)
   // Return sensor value
   if (digitalMode)
     return digitalRead(SENSOR_IN);
-  else
+  else 
     return analogRead(SENSOR_IN);
 #else
   if (digitalMode)
@@ -115,7 +115,7 @@ int AirSensor::getValue(int sensor, bool light)
 }
 
 
-AirSensor::AirSensor(int requiredSamples, int skippedSamples) : thresholds{ 10000, 10000, 10000, 10000, 10000, 10000 }, samplesToAcquire(requiredSamples), samplesToSkip(skippedSamples), calibrated{ 0, 0, 0, 0, 0, 0 }
+AirSensor::AirSensor(int requiredSamples, int skippedSamples) : thresholds{ 200, 240, 500, 350, 600, 380, }, samplesToAcquire(requiredSamples), samplesToSkip(skippedSamples), calibrated{ 0, 0, 0, 0, 0, 0 }
 {
 #ifdef IR_SENSOR_ANALOG
   digitalMode = false;
@@ -195,6 +195,8 @@ bool AirSensor::isCalibrated()
 bool AirSensor::getSensorState(int sensor) {
   // Flash the LED and read the IR sensor
   int value = getValue(sensor, true);
+  Serial.print(value);
+  //Serial.print("\t");
   turnOffLight();
 
   if (digitalMode) 
@@ -204,7 +206,9 @@ bool AirSensor::getSensorState(int sensor) {
   else 
   {
     if (calibrated[sensor]) 
-    {
+    {      
+      //Serial.print(thresholds[sensor]);
+      //Serial.print("\t");
       return value < thresholds[sensor];
     } 
     else 
@@ -225,12 +229,15 @@ float AirSensor::getHandPosition()
   int highestTriggered = -1;
   for (int i = 0; i < 6; i++)
   {
+    //Serial.print(i);
+    //Serial.print(":");
     if (getSensorState(i))
     {
       if ((i + 1) > highestTriggered)
         highestTriggered = i + 1;
     }
   }
+  Serial.println();
   return highestTriggered == -1 ? 0 : ((float)highestTriggered / 6.0f);
 }
 
