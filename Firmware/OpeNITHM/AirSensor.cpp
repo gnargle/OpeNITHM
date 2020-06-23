@@ -172,7 +172,7 @@ void AirSensor::analogCalibrate()
 
     // consider the sensor calibrated, finalize calibration for this sensor.
     calibrated[sensor] = true;
-    thresholds[sensor] *= (analogSensitivity / 100.0f);
+    thresholds[sensor] = 100;
   }
 #endif
 }
