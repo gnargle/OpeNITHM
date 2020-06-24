@@ -37,7 +37,6 @@ void initializeController();
 void setup() {
   Serial.begin(115200);
   FastLED.addLeds<LED_TYPE, RGBPIN, LED_ORDER>(leds, 16);
-  EEPROM.put(66, 0); //reset sneitivity every time until we're sorted
   initializeController();
 }
 
@@ -214,7 +213,6 @@ void loop() {
     output->sendSensorEvent(sensor->getHandPosition());
 #endif
 #endif
-//Serial.println();
 
   // Send update
 #if !defined(SERIAL_PLOT) && defined(USB)

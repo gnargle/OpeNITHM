@@ -195,8 +195,6 @@ bool AirSensor::isCalibrated()
 bool AirSensor::getSensorState(int sensor) {
   // Flash the LED and read the IR sensor
   int value = getValue(sensor, true);
-  Serial.print(value);
-  //Serial.print("\t");
   turnOffLight();
 
   if (digitalMode) 
@@ -207,8 +205,6 @@ bool AirSensor::getSensorState(int sensor) {
   {
     if (calibrated[sensor]) 
     {      
-      //Serial.print(thresholds[sensor]);
-      //Serial.print("\t");
       return value < thresholds[sensor];
     } 
     else 
@@ -229,15 +225,12 @@ float AirSensor::getHandPosition()
   int highestTriggered = -1;
   for (int i = 0; i < 6; i++)
   {
-    //Serial.print(i);
-    //Serial.print(":");
     if (getSensorState(i))
     {
       if ((i + 1) > highestTriggered)
         highestTriggered = i + 1;
     }
   }
-  Serial.println();
   return highestTriggered == -1 ? 0 : ((float)highestTriggered / 6.0f);
 }
 
