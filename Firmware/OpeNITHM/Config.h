@@ -35,6 +35,9 @@
 // Define PLOT_PIN as -1 to print all key's values, otherwise define as 0-15 for an individual key
 #define PLOT_PIN -1
 
+//Uncomment this line to output air sensor values and their thresholds to serial
+//#define PLOT_AIR
+
 // Uncomment this if you wish to ignore a falsly calibrated air sensor
 //#define IGNORE_AIR_CALIBRATION
 

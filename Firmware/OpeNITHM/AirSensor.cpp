@@ -172,7 +172,7 @@ void AirSensor::analogCalibrate()
 
     // consider the sensor calibrated, finalize calibration for this sensor.
     calibrated[sensor] = true;
-    thresholds[sensor] = 100;
+    thresholds[sensor] = 200;
   }
 #endif
 }
@@ -195,6 +195,10 @@ bool AirSensor::isCalibrated()
 bool AirSensor::getSensorState(int sensor) {
   // Flash the LED and read the IR sensor
   int value = getValue(sensor, true);
+  #ifdef PLOT_AIR
+    Serial.print(value);
+    Serial.print("\t");
+  #endif
   turnOffLight();
 
   if (digitalMode) 
@@ -205,6 +209,10 @@ bool AirSensor::getSensorState(int sensor) {
   {
     if (calibrated[sensor]) 
     {      
+      #ifdef PLOT_AIR
+        Serial.print(thresholds[sensor]);
+        Serial.print("\t");
+      #endif
       return value < thresholds[sensor];
     } 
     else 
@@ -225,12 +233,19 @@ float AirSensor::getHandPosition()
   int highestTriggered = -1;
   for (int i = 0; i < 6; i++)
   {
+    #ifdef PLOT_AIR
+      Serial.print(i);
+      Serial.print(":");
+    #endif
     if (getSensorState(i))
     {
       if ((i + 1) > highestTriggered)
         highestTriggered = i + 1;
     }
   }
+  #ifdef PLOT_AIR
+    Serial.println();
+  #endif
   return highestTriggered == -1 ? 0 : ((float)highestTriggered / 6.0f);
 }
 

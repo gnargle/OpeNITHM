@@ -214,6 +214,10 @@ void loop() {
 #endif
 #endif
 
+#ifdef PLOT_AIR
+  Serial.println();
+#endif
+
   // Send update
 #if !defined(SERIAL_PLOT) && defined(USB)
   output->sendUpdate();
