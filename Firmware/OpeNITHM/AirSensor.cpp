@@ -210,8 +210,8 @@ bool AirSensor::getSensorState(int sensor) {
     if (calibrated[sensor]) 
     {      
       #ifdef PLOT_AIR
-        Serial.print(thresholds[sensor]);
-        Serial.print("\t");
+        //Serial.print(thresholds[sensor]);
+        //Serial.print("\t");
       #endif
       return value < thresholds[sensor];
     } 
