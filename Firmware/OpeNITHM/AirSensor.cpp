@@ -89,6 +89,10 @@ uint16_t AirSensor::getValue(int sensor) {
 
   // Turn the lights off when we're done reading
   turnOffLight();
+#ifdef AIR_PLOT
+  Serial.print(value);
+  Serial.print("\t");
+#endif
   return value;
 }
 
@@ -183,6 +187,10 @@ float AirSensor::getHandPosition() {
       }
     }
   }
+
+#ifdef AIR_PLOT
+  Serial.println();
+#endif
 
   if (calibrated) {
     return highestTriggered == -1 ? 0 : ((float) highestTriggered / 6.0f);
