@@ -212,6 +212,9 @@ uint8_t AirSensor::getSensorReadings() {
   for (int i = 5; i >= 0; i--) {
     reading |= ((int) getSensorState(i) << i);
   }
+#ifdef AIR_PLOT
+  Serial.println();
+#endif
 
   if (calibrated) {
     return reading;
